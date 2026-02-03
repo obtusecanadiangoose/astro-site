@@ -1,0 +1,158 @@
+---
+interface Action {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  actions?: Action[];
+  role?: string;
+  location?: string;
+  showAuthorInfo?: boolean;
+}
+
+import { withBase } from "../utils/slugify";
+
+const { title, description, actions = [], role, location, showAuthorInfo = true } = Astro.props as Props;
+---
+
+<section class={`flex flex-col ${showAuthorInfo ? 'justify-between' : 'justify-start items-start'} px-4 md:px-0`} style={showAuthorInfo ? "min-height: calc(100vh - (var(--grid-cell) / 2));" : "min-height: calc(100vh - var(--grid-cell));"}>
+  <div class={`grid gap-3 md:gap-4 ${showAuthorInfo ? 'max-w-3xl pb-6 md:pb-10' : 'w-full'}`}>
+    <div class={`flex flex-col lg:flex-row ${showAuthorInfo ? 'lg:justify-between items-start' : 'items-start justify-start'} gap-8 relative`}>
+      <div
+        class="hero-letters text-[15vw] sm:text-[12vw] md:text-[8rem] lg:text-[10rem] leading-[0.85] font-extrabold uppercase text-left relative"
+        aria-hidden="true"
+      >
+        {title.split(' ').map((word, wordIndex, arr) => {
+          const letters = word.split('').map((letter, letterIndex) => (
+            <span 
+              class={`hero-letter ${wordIndex === 0 && letter.toUpperCase() === 'M' ? 'hero-m-letter' : ''}`}
+              data-letter={letter}
+            >
+              {letter === ' ' ? '\u00A0' : letter}
+            </span>
+          ));
+          
+          if (wordIndex < arr.length - 1) {
+            return (
+              <>
+                {letters}
+                <span class="hero-word-spacer"></span>
+              </>
+            );
+          }
+          return <span class="hero-name-break hero-word">{letters}</span>;
+        })}
+        
+        <!-- Music text overlay -->
+        <div class="hero-music-overlay">
+          <div class="music-text">
+            <span class="music-letter">U</span>
+            <span class="music-letter">S</span>
+            <span class="music-letter">I</span>
+            <span class="music-letter">C</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Author info grid beneath the title -->
+    </div>
+  </div>
+
+  {showAuthorInfo && (
+    <div class="max-w-360 mx-auto px-8 w-full mt-auto">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-3 border-b pb-8 border-base-200">
+        <div>
+          {role && <h1 class="text-xs 2xl:text-lg text-base-900 font-bold uppercase">{role}</h1>}
+        </div>
+
+        <div class="md:col-span-1">
+          {description && <p class="text-sm 2xl:text-xl text-base-600">{description}</p>}
+          {location && <p class="text-sm text-base-600 mt-2">{location}</p>}
+        </div>
+
+        <div class="md:col-span-1 flex items-start md:justify-end">
+          {actions.length > 0 && (
+            <div class="mt-0 md:mt-0 flex flex-col md:flex-row md:items-start md:justify-end gap-3">
+              {actions.map((action) => (
+                <a
+                  class="text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase inline-block px-4 py-2"
+                  href={withBase(action.href)}
+                >
+                  {action.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )}
+</section>
+
+<script type="module">
+  window.addEventListener('DOMContentLoaded', () => {
+    const mLetter = document.querySelector('.hero-m-letter');
+    const musicOverlay = document.querySelector('.hero-music-overlay');
+    const heroLetters = document.querySelector('.hero-letters');
+    const otherLetters = document.querySelectorAll('.hero-letter:not(.hero-m-letter)');
+
+    if (!mLetter || !musicOverlay || !heroLetters) return;
+
+    function positionOverlay() {
+      const mRect = mLetter.getBoundingClientRect();
+      const containerRect = heroLetters.getBoundingClientRect();
+      // position relative to the .hero-letters container, centered on M
+      const overlayWidth = musicOverlay.offsetWidth;
+      const centerOffset = (mRect.width - overlayWidth) / 2;
+      musicOverlay.style.left = `${mRect.left - containerRect.left + centerOffset}px`;
+
+      // compute spacing between music letters (U->S distance)
+      const letters = musicOverlay.querySelectorAll('.music-letter');
+      let spacing = mRect.height * 0.5; // fallback spacing
+      let firstLetterOffset = 0;
+      if (letters.length >= 2) {
+        const letter0 = letters[0];
+        const letter1 = letters[1];
+        // Use offsetTop for local coordinates, viewport-independent
+        spacing = letter1.offsetTop - letter0.offsetTop;
+        firstLetterOffset = letter0.offsetTop;
+      }
+
+      // reduce spacing by 80% per request
+      spacing = spacing * 0.2;
+
+      // desired top position so that distance from M bottom to first letter equals spacing
+      const desiredFirstTop = mRect.bottom + spacing;
+      const overlayTop = (desiredFirstTop - containerRect.top) - firstLetterOffset;
+      musicOverlay.style.top = `${overlayTop}px`;
+    }
+
+    function showOverlay() {
+      positionOverlay();
+      musicOverlay.classList.add('active');
+      otherLetters.forEach(letter => letter.classList.add('fade-out'));
+    }
+
+    function maybeHide(e) {
+      const to = e.relatedTarget;
+      if (to && (musicOverlay.contains(to) || mLetter.contains(to))) return;
+      musicOverlay.classList.remove('active');
+      otherLetters.forEach(letter => letter.classList.remove('fade-out'));
+    }
+
+    // position on enter and on resize
+    mLetter.addEventListener('mouseenter', showOverlay);
+    musicOverlay.addEventListener('mouseenter', showOverlay);
+
+    mLetter.addEventListener('mouseleave', maybeHide);
+    musicOverlay.addEventListener('mouseleave', maybeHide);
+
+    window.addEventListener('resize', () => {
+      if (musicOverlay.classList.contains('active')) positionOverlay();
+    });
+  });
+</script>
