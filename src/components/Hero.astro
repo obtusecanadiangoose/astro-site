@@ -27,14 +27,113 @@ const { title, description, actions = [], role, location, showAuthorInfo = true 
         aria-hidden="true"
       >
         {title.split(' ').map((word, wordIndex, arr) => {
-          const letters = word.split('').map((letter, letterIndex) => (
-            <span 
-              class={`hero-letter ${wordIndex === 0 && letter.toUpperCase() === 'M' ? 'hero-m-letter' : ''}`}
-              data-letter={letter}
-            >
-              {letter === ' ' ? '\u00A0' : letter}
-            </span>
-          ));
+          const letters = word.split('').map((letter, letterIndex) => {
+            const isMletter = wordIndex === 0 && letter.toUpperCase() === 'M';
+            const isOletter = wordIndex === 1 && letter.toUpperCase() === 'O';
+            const isLletter = wordIndex === 0 && letter.toUpperCase() === 'L';
+            const isIletter = wordIndex === 0 && letter.toUpperCase() === 'I';
+            const isAletter = wordIndex === 0 && letter.toUpperCase() === 'A';
+            const isGletter = wordIndex === 1 && letter.toUpperCase() === 'G';
+            const isInstagramIletter = wordIndex === 1 && letter.toUpperCase() === 'I' && letterIndex === 2;
+            const isEletter = wordIndex === 1 && letter.toUpperCase() === 'E';
+            
+            if (isMletter) {
+              return (
+                <a href={withBase("projects/first-project/")} class="hero-music-link"><span 
+                  class={`hero-letter hero-m-letter`}
+                  data-letter={letter}
+                >
+                  {letter === ' ' ? '\u00A0' : letter}
+                </span></a>
+              );
+            }
+            
+            if (isOletter) {
+              return (
+                <a href="https://www.youtube.com/" class="hero-youtube-link"><span 
+                  class={`hero-letter hero-o-letter`}
+                  data-letter={letter}
+                >
+                  {letter === ' ' ? '\u00A0' : letter}
+                </span></a>
+              );
+            }
+            
+            if (isLletter) {
+              return (
+                <a href={withBase("blog/")} class="hero-blog-link"><span 
+                  class={`hero-letter hero-l-letter`}
+                  data-letter={letter}
+                >
+                  {letter === ' ' ? '\u00A0' : letter}
+                </span></a>
+              );
+            }
+            
+            if (isIletter) {
+              return (
+                <a href="https://github.com/obtusecanadiangoose" class="hero-github-link"><span 
+                  class={`hero-letter hero-i-letter`}
+                  data-letter={letter}
+                >
+                  {letter === ' ' ? '\u00A0' : letter}
+                </span></a>
+              );
+            }
+            
+            if (isAletter) {
+              return (
+                <a href={withBase("tags/astro/")} class="hero-art-link"><span 
+                  class={`hero-letter hero-a-letter`}
+                  data-letter={letter}
+                >
+                  {letter === ' ' ? '\u00A0' : letter}
+                </span></a>
+              );
+            }
+            
+            if (isGletter) {
+              return (
+                <a href={withBase("tags/gardening/")} class="hero-gardening-link"><span 
+                  class={`hero-letter hero-g-letter`}
+                  data-letter={letter}
+                >
+                  {letter === ' ' ? '\u00A0' : letter}
+                </span></a>
+              );
+            }
+            
+            if (isInstagramIletter) {
+              return (
+                <a href="https://www.instagram.com/ogilvieliam" class="hero-instagram-link"><span 
+                  class={`hero-letter hero-instagram-i-letter`}
+                  data-letter={letter}
+                >
+                  {letter === ' ' ? '\u00A0' : letter}
+                </span></a>
+              );
+            }
+            
+            if (isEletter) {
+              return (
+                <a href={withBase("LIAM_OGILVIE_resume.pdf")} class="hero-resume-link"><span 
+                  class={`hero-letter hero-e-letter`}
+                  data-letter={letter}
+                >
+                  {letter === ' ' ? '\u00A0' : letter}
+                </span></a>
+              );
+            }
+            
+            return (
+              <span 
+                class="hero-letter"
+                data-letter={letter}
+              >
+                {letter === ' ' ? '\u00A0' : letter}
+              </span>
+            );
+          });
           
           if (wordIndex < arr.length - 1) {
             return (
@@ -48,14 +147,141 @@ const { title, description, actions = [], role, location, showAuthorInfo = true 
         })}
         
         <!-- Music text overlay -->
-        <div class="hero-music-overlay">
-          <div class="music-text">
-            <span class="music-letter">U</span>
-            <span class="music-letter">S</span>
-            <span class="music-letter">I</span>
-            <span class="music-letter">C</span>
+        <a href={withBase("projects/first-project/")} class="hero-music-link">
+          <div class="hero-music-overlay">
+            <div class="music-text">
+              <span class="music-letter">U</span>
+              <span class="music-letter">S</span>
+              <span class="music-letter">I</span>
+              <span class="music-letter">C</span>
+            </div>
           </div>
-        </div>
+        </a>
+        
+        <!-- YouTube text overlay -->
+        <a href="https://www.youtube.com/" class="hero-youtube-link">
+          <div class="hero-youtube-overlay">
+            <div class="youtube-text">
+              <span class="youtube-letter">U</span>
+              <span class="youtube-letter">T</span>
+              <span class="youtube-letter">U</span>
+              <span class="youtube-letter">B</span>
+              <span class="youtube-letter">E</span>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Y text overlay (scrolls up from O) -->
+        <a href="https://www.youtube.com/" class="hero-youtube-link">
+          <div class="hero-y-overlay">
+            <div class="y-text">
+              <span class="y-letter">Y</span>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Blog text overlay (OG scrolls down from L) -->
+        <a href={withBase("blog/")} class="hero-blog-link">
+          <div class="hero-blog-overlay">
+            <div class="blog-text">
+              <span class="blog-letter">O</span>
+              <span class="blog-letter">G</span>
+            </div>
+          </div>
+        </a>
+        
+        <!-- B text overlay (scrolls up from L) -->
+        <a href={withBase("blog/")} class="hero-blog-link">
+          <div class="hero-b-overlay">
+            <div class="b-text">
+              <span class="b-letter">B</span>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Github text overlay (thub scrolls down from I) -->
+        <a href="https://github.com/obtusecanadiangoose" class="hero-github-link">
+          <div class="hero-github-overlay">
+            <div class="github-text">
+              <span class="github-letter">T</span>
+              <span class="github-letter">H</span>
+              <span class="github-letter">U</span>
+              <span class="github-letter">B</span>
+            </div>
+          </div>
+        </a>
+        
+        <!-- G text overlay (scrolls up from I) -->
+        <a href="https://github.com/obtusecanadiangoose" class="hero-github-link">
+          <div class="hero-g-overlay">
+            <div class="g-text">
+              <span class="g-letter">G</span>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Art text overlay (rt scrolls down from A) -->
+        <a href={withBase("tags/astro/")} class="hero-art-link">
+          <div class="hero-art-overlay">
+            <div class="art-text">
+              <span class="art-letter">R</span>
+              <span class="art-letter">T</span>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Gardening text overlay (ardening scrolls down from G) -->
+        <a href={withBase("tags/gardening/")} class="hero-gardening-link">
+          <div class="hero-gardening-overlay">
+            <div class="gardening-text">
+              <span class="gardening-letter">A</span>
+              <span class="gardening-letter">R</span>
+              <span class="gardening-letter">D</span>
+              <span class="gardening-letter">E</span>
+              <span class="gardening-letter">N</span>
+              <span class="gardening-letter">I</span>
+              <span class="gardening-letter">N</span>
+              <span class="gardening-letter">G</span>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Instagram text overlay (nstagram scrolls down from I) -->
+        <a href="https://www.instagram.com/ogilvieliam" class="hero-instagram-link">
+          <div class="hero-instagram-overlay">
+            <div class="instagram-text">
+              <span class="instagram-letter">N</span>
+              <span class="instagram-letter">S</span>
+              <span class="instagram-letter">T</span>
+              <span class="instagram-letter">A</span>
+              <span class="instagram-letter">G</span>
+              <span class="instagram-letter">R</span>
+              <span class="instagram-letter">A</span>
+              <span class="instagram-letter">M</span>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Resume text overlay (sume scrolls down from E) -->
+        <a href={withBase("LIAM_OGILVIE_resume.pdf")} class="hero-resume-link">
+          <div class="hero-resume-overlay">
+            <div class="resume-text">
+              <span class="resume-letter">S</span>
+              <span class="resume-letter">U</span>
+              <span class="resume-letter">M</span>
+              <span class="resume-letter">E</span>
+            </div>
+          </div>
+        </a>
+        
+        <!-- R text overlay (scrolls up from E) -->
+        <a href={withBase("LIAM_OGILVIE_resume.pdf")} class="hero-resume-link">
+          <div class="hero-r-overlay">
+            <div class="r-text">
+              <span class="r-letter">R</span>
+            </div>
+          </div>
+        </a>
       </div>
 
       <!-- Author info grid beneath the title -->
@@ -97,62 +323,1354 @@ const { title, description, actions = [], role, location, showAuthorInfo = true 
   window.addEventListener('DOMContentLoaded', () => {
     const mLetter = document.querySelector('.hero-m-letter');
     const musicOverlay = document.querySelector('.hero-music-overlay');
+    const oLetter = document.querySelector('.hero-o-letter');
+    const youtubeOverlay = document.querySelector('.hero-youtube-overlay');
+    const yOverlay = document.querySelector('.hero-y-overlay');
+    const lLetter = document.querySelector('.hero-l-letter');
+    const blogOverlay = document.querySelector('.hero-blog-overlay');
+    const bOverlay = document.querySelector('.hero-b-overlay');
+    const iLetter = document.querySelector('.hero-i-letter');
+    const githubOverlay = document.querySelector('.hero-github-overlay');
+    const gOverlay = document.querySelector('.hero-g-overlay');
+    const aLetter = document.querySelector('.hero-a-letter');
+    const artOverlay = document.querySelector('.hero-art-overlay');
+    const gLetter = document.querySelector('.hero-g-letter');
+    const gardeningOverlay = document.querySelector('.hero-gardening-overlay');
+    const instagramILetter = document.querySelector('.hero-instagram-i-letter');
+    const instagramOverlay = document.querySelector('.hero-instagram-overlay');
+    const eLetter = document.querySelector('.hero-e-letter');
+    const resumeOverlay = document.querySelector('.hero-resume-overlay');
+    const rOverlay = document.querySelector('.hero-r-overlay');
     const heroLetters = document.querySelector('.hero-letters');
-    const otherLetters = document.querySelectorAll('.hero-letter:not(.hero-m-letter)');
+    const otherLetters = document.querySelectorAll('.hero-letter:not(.hero-m-letter):not(.hero-o-letter):not(.hero-l-letter):not(.hero-i-letter):not(.hero-a-letter):not(.hero-g-letter):not(.hero-instagram-i-letter):not(.hero-e-letter)');
+    const allLetters = document.querySelectorAll('.hero-letter');
 
-    if (!mLetter || !musicOverlay || !heroLetters) return;
+    if (!heroLetters) return;
 
-    function positionOverlay() {
-      const mRect = mLetter.getBoundingClientRect();
-      const containerRect = heroLetters.getBoundingClientRect();
-      // position relative to the .hero-letters container, centered on M
-      const overlayWidth = musicOverlay.offsetWidth;
-      const centerOffset = (mRect.width - overlayWidth) / 2;
-      musicOverlay.style.left = `${mRect.left - containerRect.left + centerOffset}px`;
+    let cachedMusicPosition = null;
+    let cachedYoutubePosition = null;
+    let cachedYPosition = null;
+    let cachedBlogPosition = null;
+    let cachedBPosition = null;
+    let cachedGithubPosition = null;
+    let cachedGPosition = null;
+    let cachedArtPosition = null;
+    let cachedGardeningPosition = null;
+    let cachedInstagramPosition = null;
+    let cachedResumePosition = null;
+    let cachedRPosition = null;
 
-      // compute spacing between music letters (U->S distance)
-      const letters = musicOverlay.querySelectorAll('.music-letter');
-      let spacing = mRect.height * 0.5; // fallback spacing
-      let firstLetterOffset = 0;
-      if (letters.length >= 2) {
-        const letter0 = letters[0];
-        const letter1 = letters[1];
-        // Use offsetTop for local coordinates, viewport-independent
-        spacing = letter1.offsetTop - letter0.offsetTop;
-        firstLetterOffset = letter0.offsetTop;
+    function positionMusicOverlay() {
+      if (!mLetter || !musicOverlay) return;
+      
+      // Use cached position if available to avoid recalculating during flickers
+      if (cachedMusicPosition) {
+        musicOverlay.style.left = cachedMusicPosition.left;
+        musicOverlay.style.top = cachedMusicPosition.top;
+        return;
       }
 
-      // reduce spacing by 80% per request
-      spacing = spacing * 0.2;
+      const mRect = mLetter.getBoundingClientRect();
+      const containerRect = heroLetters.getBoundingClientRect();
+      const overlayWidth = musicOverlay.offsetWidth;
+      const centerOffset = (mRect.width - overlayWidth) / 2;
+      const leftPos = `${mRect.left - containerRect.left + centerOffset}px`;
 
-      // desired top position so that distance from M bottom to first letter equals spacing
+      const letters = musicOverlay.querySelectorAll('.music-letter');
+      letters.forEach(letter => {
+        letter.style.transform = 'none';
+      });
+      
+      // Force reflow to ensure transforms are cleared before measuring
+      void musicOverlay.offsetHeight;
+      
+      let firstLetterOffset = 0;
+      if (letters.length >= 1) {
+        firstLetterOffset = letters[0].offsetTop;
+      }
+
+      letters.forEach(letter => {
+        letter.style.transform = '';
+      });
+
+      const fontSize = parseFloat(getComputedStyle(mLetter).fontSize);
+      const spacing = -0.2 * fontSize;
       const desiredFirstTop = mRect.bottom + spacing;
-      const overlayTop = (desiredFirstTop - containerRect.top) - firstLetterOffset;
-      musicOverlay.style.top = `${overlayTop}px`;
+      const topPos = `${(desiredFirstTop - containerRect.top) - firstLetterOffset}px`;
+      
+      cachedMusicPosition = { left: leftPos, top: topPos };
+      
+      musicOverlay.style.left = leftPos;
+      musicOverlay.style.top = topPos;
     }
 
-    function showOverlay() {
-      positionOverlay();
+    function positionYoutubeOverlay() {
+      if (!oLetter || !youtubeOverlay) return;
+      
+      if (cachedYoutubePosition) {
+        youtubeOverlay.style.left = cachedYoutubePosition.left;
+        youtubeOverlay.style.top = cachedYoutubePosition.top;
+        return;
+      }
+
+      const oRect = oLetter.getBoundingClientRect();
+      const containerRect = heroLetters.getBoundingClientRect();
+      const overlayWidth = youtubeOverlay.offsetWidth;
+      const centerOffset = (oRect.width - overlayWidth) / 2;
+      const leftPos = `${oRect.left - containerRect.left + centerOffset}px`;
+
+      const letters = youtubeOverlay.querySelectorAll('.youtube-letter');
+      letters.forEach(letter => {
+        letter.style.transform = 'none';
+      });
+      
+      // Force reflow to ensure transforms are cleared before measuring
+      void youtubeOverlay.offsetHeight;
+      
+      let firstLetterOffset = 0;
+      if (letters.length >= 1) {
+        firstLetterOffset = letters[0].offsetTop;
+      }
+
+      letters.forEach(letter => {
+        letter.style.transform = '';
+      });
+
+      const fontSize = parseFloat(getComputedStyle(oLetter).fontSize);
+      const spacing = -0.2 * fontSize;
+      const desiredFirstTop = oRect.bottom + spacing;
+      const topPos = `${(desiredFirstTop - containerRect.top) - firstLetterOffset}px`;
+      
+      cachedYoutubePosition = { left: leftPos, top: topPos };
+      
+      youtubeOverlay.style.left = leftPos;
+      youtubeOverlay.style.top = topPos;
+    }
+
+    function positionYOverlay() {
+      if (!oLetter || !yOverlay) return;
+      
+      if (cachedYPosition) {
+        yOverlay.style.left = cachedYPosition.left;
+        yOverlay.style.top = cachedYPosition.top;
+        return;
+      }
+
+      const oRect = oLetter.getBoundingClientRect();
+      const containerRect = heroLetters.getBoundingClientRect();
+      const overlayWidth = yOverlay.offsetWidth;
+      const centerOffset = (oRect.width - overlayWidth) / 2;
+      const leftPos = `${oRect.left - containerRect.left + centerOffset}px`;
+
+      const letters = yOverlay.querySelectorAll('.y-letter');
+      letters.forEach(letter => {
+        letter.style.transform = 'none';
+      });
+      
+      // Force reflow to ensure transforms are cleared before measuring
+      void yOverlay.offsetHeight;
+      
+      let firstLetterOffset = 0;
+      if (letters.length >= 1) {
+        firstLetterOffset = letters[0].offsetTop;
+      }
+
+      letters.forEach(letter => {
+        letter.style.transform = '';
+      });
+
+      const fontSize = parseFloat(getComputedStyle(oLetter).fontSize);
+      const spacing = 0.65 * fontSize;
+      // Position Y above the O (use top instead of bottom)
+      const desiredFirstTop = oRect.top - fontSize + spacing;
+      const topPos = `${(desiredFirstTop - containerRect.top) - firstLetterOffset}px`;
+      
+      cachedYPosition = { left: leftPos, top: topPos };
+      
+      yOverlay.style.left = leftPos;
+      yOverlay.style.top = topPos;
+    }
+
+    function positionBlogOverlay() {
+      if (!lLetter || !blogOverlay) return;
+      
+      if (cachedBlogPosition) {
+        blogOverlay.style.left = cachedBlogPosition.left;
+        blogOverlay.style.top = cachedBlogPosition.top;
+        return;
+      }
+
+      const lRect = lLetter.getBoundingClientRect();
+      const containerRect = heroLetters.getBoundingClientRect();
+      const overlayWidth = blogOverlay.offsetWidth;
+      const centerOffset = (lRect.width - overlayWidth) / 2;
+      const leftPos = `${lRect.left - containerRect.left + centerOffset}px`;
+
+      const letters = blogOverlay.querySelectorAll('.blog-letter');
+      letters.forEach(letter => {
+        letter.style.transform = 'none';
+      });
+      
+      // Force reflow to ensure transforms are cleared before measuring
+      void blogOverlay.offsetHeight;
+      
+      let firstLetterOffset = 0;
+      if (letters.length >= 1) {
+        firstLetterOffset = letters[0].offsetTop;
+      }
+
+      letters.forEach(letter => {
+        letter.style.transform = '';
+      });
+
+      const fontSize = parseFloat(getComputedStyle(lLetter).fontSize);
+      const spacing = -0.2 * fontSize;
+      const desiredFirstTop = lRect.bottom + spacing;
+      const topPos = `${(desiredFirstTop - containerRect.top) - firstLetterOffset}px`;
+      
+      cachedBlogPosition = { left: leftPos, top: topPos };
+      
+      blogOverlay.style.left = leftPos;
+      blogOverlay.style.top = topPos;
+    }
+
+    function positionBOverlay() {
+      if (!lLetter || !bOverlay) return;
+      
+      if (cachedBPosition) {
+        bOverlay.style.left = cachedBPosition.left;
+        bOverlay.style.top = cachedBPosition.top;
+        return;
+      }
+
+      const lRect = lLetter.getBoundingClientRect();
+      const containerRect = heroLetters.getBoundingClientRect();
+      const overlayWidth = bOverlay.offsetWidth;
+      const centerOffset = (lRect.width - overlayWidth) / 2;
+      const leftPos = `${lRect.left - containerRect.left + centerOffset}px`;
+
+      const letters = bOverlay.querySelectorAll('.b-letter');
+      letters.forEach(letter => {
+        letter.style.transform = 'none';
+      });
+      
+      // Force reflow to ensure transforms are cleared before measuring
+      void bOverlay.offsetHeight;
+      
+      let firstLetterOffset = 0;
+      if (letters.length >= 1) {
+        firstLetterOffset = letters[0].offsetTop;
+      }
+
+      letters.forEach(letter => {
+        letter.style.transform = '';
+      });
+
+      const fontSize = parseFloat(getComputedStyle(lLetter).fontSize);
+      const spacing = 0.65  * fontSize;
+      // Position B above the L (use top instead of bottom)
+      const desiredFirstTop = lRect.top - fontSize + spacing;
+      const topPos = `${(desiredFirstTop - containerRect.top) - firstLetterOffset}px`;
+      
+      cachedBPosition = { left: leftPos, top: topPos };
+      
+      bOverlay.style.left = leftPos;
+      bOverlay.style.top = topPos;
+    }
+
+    function positionGithubOverlay() {
+      if (!iLetter || !githubOverlay) return;
+      
+      if (cachedGithubPosition) {
+        githubOverlay.style.left = cachedGithubPosition.left;
+        githubOverlay.style.top = cachedGithubPosition.top;
+        return;
+      }
+
+      const iRect = iLetter.getBoundingClientRect();
+      const containerRect = heroLetters.getBoundingClientRect();
+      const overlayWidth = githubOverlay.offsetWidth;
+      const centerOffset = (iRect.width - overlayWidth) / 2;
+      const leftPos = `${iRect.left - containerRect.left + centerOffset}px`;
+
+      const letters = githubOverlay.querySelectorAll('.github-letter');
+      letters.forEach(letter => {
+        letter.style.transform = 'none';
+      });
+      
+      // Force reflow to ensure transforms are cleared before measuring
+      void githubOverlay.offsetHeight;
+      
+      let firstLetterOffset = 0;
+      if (letters.length >= 1) {
+        firstLetterOffset = letters[0].offsetTop;
+      }
+
+      letters.forEach(letter => {
+        letter.style.transform = '';
+      });
+
+      const fontSize = parseFloat(getComputedStyle(iLetter).fontSize);
+      const spacing = -0.2 * fontSize;
+      const desiredFirstTop = iRect.bottom + spacing;
+      const topPos = `${(desiredFirstTop - containerRect.top) - firstLetterOffset}px`;
+      
+      cachedGithubPosition = { left: leftPos, top: topPos };
+      
+      githubOverlay.style.left = leftPos;
+      githubOverlay.style.top = topPos;
+    }
+
+    function positionGOverlay() {
+      if (!iLetter || !gOverlay) return;
+      
+      if (cachedGPosition) {
+        gOverlay.style.left = cachedGPosition.left;
+        gOverlay.style.top = cachedGPosition.top;
+        return;
+      }
+
+      const iRect = iLetter.getBoundingClientRect();
+      const containerRect = heroLetters.getBoundingClientRect();
+      const overlayWidth = gOverlay.offsetWidth;
+      const centerOffset = (iRect.width - overlayWidth) / 2;
+      const leftPos = `${iRect.left - containerRect.left + centerOffset}px`;
+
+      const letters = gOverlay.querySelectorAll('.g-letter');
+      letters.forEach(letter => {
+        letter.style.transform = 'none';
+      });
+      
+      // Force reflow to ensure transforms are cleared before measuring
+      void gOverlay.offsetHeight;
+      
+      let firstLetterOffset = 0;
+      if (letters.length >= 1) {
+        firstLetterOffset = letters[0].offsetTop;
+      }
+
+      letters.forEach(letter => {
+        letter.style.transform = '';
+      });
+
+      const fontSize = parseFloat(getComputedStyle(iLetter).fontSize);
+      // Position G above the I (use top instead of bottom)
+      const spacing = 0.35 * fontSize;
+      const desiredFirstTop = iRect.top - spacing;
+      const topPos = `${(desiredFirstTop - containerRect.top) - firstLetterOffset}px`;
+      
+      cachedGPosition = { left: leftPos, top: topPos };
+      
+      gOverlay.style.left = leftPos;
+      gOverlay.style.top = topPos;
+    }
+
+    function positionArtOverlay() {
+      if (!aLetter || !artOverlay) return;
+      
+      if (cachedArtPosition) {
+        artOverlay.style.left = cachedArtPosition.left;
+        artOverlay.style.top = cachedArtPosition.top;
+        return;
+      }
+
+      const aRect = aLetter.getBoundingClientRect();
+      const containerRect = heroLetters.getBoundingClientRect();
+      const overlayWidth = artOverlay.offsetWidth;
+      const centerOffset = (aRect.width - overlayWidth) / 2;
+      const leftPos = `${aRect.left - containerRect.left + centerOffset}px`;
+
+      const letters = artOverlay.querySelectorAll('.art-letter');
+      letters.forEach(letter => {
+        letter.style.transform = 'none';
+      });
+      
+      // Force reflow to ensure transforms are cleared before measuring
+      void artOverlay.offsetHeight;
+      
+      let firstLetterOffset = 0;
+      if (letters.length >= 1) {
+        firstLetterOffset = letters[0].offsetTop;
+      }
+
+      letters.forEach(letter => {
+        letter.style.transform = '';
+      });
+
+      const fontSize = parseFloat(getComputedStyle(aLetter).fontSize);
+      const spacing = -0.2 * fontSize;
+      const desiredFirstTop = aRect.bottom + spacing;
+      const topPos = `${(desiredFirstTop - containerRect.top) - firstLetterOffset}px`;
+      
+      cachedArtPosition = { left: leftPos, top: topPos };
+      
+      artOverlay.style.left = leftPos;
+      artOverlay.style.top = topPos;
+    }
+
+    function positionGardeningOverlay() {
+      if (!gLetter || !gardeningOverlay) return;
+      
+      if (cachedGardeningPosition) {
+        gardeningOverlay.style.left = cachedGardeningPosition.left;
+        gardeningOverlay.style.top = cachedGardeningPosition.top;
+        return;
+      }
+
+      const gRect = gLetter.getBoundingClientRect();
+      const containerRect = heroLetters.getBoundingClientRect();
+      const overlayWidth = gardeningOverlay.offsetWidth;
+      const centerOffset = (gRect.width - overlayWidth) / 2;
+      const leftPos = `${gRect.left - containerRect.left + centerOffset}px`;
+
+      const letters = gardeningOverlay.querySelectorAll('.gardening-letter');
+      letters.forEach(letter => {
+        letter.style.transform = 'none';
+      });
+      
+      // Force reflow to ensure transforms are cleared before measuring
+      void gardeningOverlay.offsetHeight;
+      
+      let firstLetterOffset = 0;
+      if (letters.length >= 1) {
+        firstLetterOffset = letters[0].offsetTop;
+      }
+
+      letters.forEach(letter => {
+        letter.style.transform = '';
+      });
+
+      const fontSize = parseFloat(getComputedStyle(gLetter).fontSize);
+      const spacing = -0.2 * fontSize;
+      const desiredFirstTop = gRect.bottom + spacing;
+      const topPos = `${(desiredFirstTop - containerRect.top) - firstLetterOffset}px`;
+      
+      cachedGardeningPosition = { left: leftPos, top: topPos };
+      
+      gardeningOverlay.style.left = leftPos;
+      gardeningOverlay.style.top = topPos;
+    }
+
+    function positionInstagramOverlay() {
+      if (!instagramILetter || !instagramOverlay) return;
+      
+      if (cachedInstagramPosition) {
+        instagramOverlay.style.left = cachedInstagramPosition.left;
+        instagramOverlay.style.top = cachedInstagramPosition.top;
+        return;
+      }
+
+      const iRect = instagramILetter.getBoundingClientRect();
+      const containerRect = heroLetters.getBoundingClientRect();
+      const overlayWidth = instagramOverlay.offsetWidth;
+      const centerOffset = (iRect.width - overlayWidth) / 2;
+      const leftPos = `${iRect.left - containerRect.left + centerOffset}px`;
+
+      const letters = instagramOverlay.querySelectorAll('.instagram-letter');
+      letters.forEach(letter => {
+        letter.style.transform = 'none';
+      });
+      
+      // Force reflow to ensure transforms are cleared before measuring
+      void instagramOverlay.offsetHeight;
+      
+      let firstLetterOffset = 0;
+      if (letters.length >= 1) {
+        firstLetterOffset = letters[0].offsetTop;
+      }
+
+      letters.forEach(letter => {
+        letter.style.transform = '';
+      });
+
+      const fontSize = parseFloat(getComputedStyle(instagramILetter).fontSize);
+      const spacing = -0.2 * fontSize;
+      const desiredFirstTop = iRect.bottom + spacing;
+      const topPos = `${(desiredFirstTop - containerRect.top) - firstLetterOffset}px`;
+      
+      cachedInstagramPosition = { left: leftPos, top: topPos };
+      
+      instagramOverlay.style.left = leftPos;
+      instagramOverlay.style.top = topPos;
+    }
+
+    function positionResumeOverlay() {
+      if (!eLetter || !resumeOverlay) return;
+      
+      if (cachedResumePosition) {
+        resumeOverlay.style.left = cachedResumePosition.left;
+        resumeOverlay.style.top = cachedResumePosition.top;
+        return;
+      }
+
+      const eRect = eLetter.getBoundingClientRect();
+      const containerRect = heroLetters.getBoundingClientRect();
+      const overlayWidth = resumeOverlay.offsetWidth;
+      const centerOffset = (eRect.width - overlayWidth) / 2;
+      const leftPos = `${eRect.left - containerRect.left + centerOffset}px`;
+
+      const letters = resumeOverlay.querySelectorAll('.resume-letter');
+      letters.forEach(letter => {
+        letter.style.transform = 'none';
+      });
+      
+      // Force reflow to ensure transforms are cleared before measuring
+      void resumeOverlay.offsetHeight;
+      
+      let firstLetterOffset = 0;
+      if (letters.length >= 1) {
+        firstLetterOffset = letters[0].offsetTop;
+      }
+
+      letters.forEach(letter => {
+        letter.style.transform = '';
+      });
+
+      const fontSize = parseFloat(getComputedStyle(eLetter).fontSize);
+      const spacing = -0.2 * fontSize;
+      const desiredFirstTop = eRect.bottom + spacing;
+      const topPos = `${(desiredFirstTop - containerRect.top) - firstLetterOffset}px`;
+      
+      cachedResumePosition = { left: leftPos, top: topPos };
+      
+      resumeOverlay.style.left = leftPos;
+      resumeOverlay.style.top = topPos;
+    }
+
+    function positionROverlay() {
+      if (!eLetter || !rOverlay) return;
+      
+      if (cachedRPosition) {
+        rOverlay.style.left = cachedRPosition.left;
+        rOverlay.style.top = cachedRPosition.top;
+        return;
+      }
+
+      const eRect = eLetter.getBoundingClientRect();
+      const containerRect = heroLetters.getBoundingClientRect();
+      const overlayWidth = rOverlay.offsetWidth;
+      const centerOffset = (eRect.width - overlayWidth) / 2;
+      const leftPos = `${eRect.left - containerRect.left + centerOffset}px`;
+
+      const letters = rOverlay.querySelectorAll('.r-letter');
+      letters.forEach(letter => {
+        letter.style.transform = 'none';
+      });
+      
+      // Force reflow to ensure transforms are cleared before measuring
+      void rOverlay.offsetHeight;
+      
+      let firstLetterOffset = 0;
+      if (letters.length >= 1) {
+        firstLetterOffset = letters[0].offsetTop;
+      }
+
+      letters.forEach(letter => {
+        letter.style.transform = '';
+      });
+
+      const fontSize = parseFloat(getComputedStyle(eLetter).fontSize);
+      const spacing = 0.65 * fontSize;
+      // Position R above the E (use top instead of bottom)
+      const desiredFirstTop = eRect.top - fontSize + spacing;
+      const topPos = `${(desiredFirstTop - containerRect.top) - firstLetterOffset}px`;
+      
+      cachedRPosition = { left: leftPos, top: topPos };
+      
+      rOverlay.style.left = leftPos;
+      rOverlay.style.top = topPos;
+    }
+
+    function showMusicOverlay() {
+      if (!mLetter || !musicOverlay) return;
+      
+      // Always recalculate position on hover to ensure accuracy
+      cachedMusicPosition = null;
+      musicOverlay.classList.remove('active');
+      positionMusicOverlay();
+      void musicOverlay.offsetHeight;
+      
       musicOverlay.classList.add('active');
-      otherLetters.forEach(letter => letter.classList.add('fade-out'));
+      mLetter.classList.add('active');
+      allLetters.forEach(letter => {
+        if (!letter.classList.contains('hero-m-letter')) {
+          letter.classList.add('fade-out');
+        }
+      });
     }
 
-    function maybeHide(e) {
+    function keepMusicActive() {
+      if (!mLetter || !musicOverlay) return;
+      musicOverlay.classList.add('active');
+      mLetter.classList.add('active');
+    }
+
+    function maybeHideMusic(e) {
+      if (!mLetter || !musicOverlay) return;
       const to = e.relatedTarget;
       if (to && (musicOverlay.contains(to) || mLetter.contains(to))) return;
+      
       musicOverlay.classList.remove('active');
-      otherLetters.forEach(letter => letter.classList.remove('fade-out'));
+      mLetter.classList.remove('active');
+      allLetters.forEach(letter => letter.classList.remove('fade-out'));
+      
+      setTimeout(() => {
+        if (!musicOverlay.classList.contains('active')) {
+          const letters = musicOverlay.querySelectorAll('.music-letter');
+          letters.forEach(letter => {
+            letter.style.animation = 'none';
+            void letter.offsetHeight;
+            letter.style.animation = '';
+          });
+        }
+      }, 600);
     }
 
-    // position on enter and on resize
-    mLetter.addEventListener('mouseenter', showOverlay);
-    musicOverlay.addEventListener('mouseenter', showOverlay);
+    function showYoutubeOverlay() {
+      if (!oLetter || !youtubeOverlay || !yOverlay) return;
+      
+      // Always recalculate position on hover to ensure accuracy
+      cachedYoutubePosition = null;
+      cachedYPosition = null;
+      youtubeOverlay.classList.remove('active');
+      yOverlay.classList.remove('active');
+      positionYoutubeOverlay();
+      positionYOverlay();
+      void youtubeOverlay.offsetHeight;
+      void yOverlay.offsetHeight;
+      
+      youtubeOverlay.classList.add('active');
+      yOverlay.classList.add('active');
+      oLetter.classList.add('active');
+      allLetters.forEach(letter => {
+        if (!letter.classList.contains('hero-o-letter')) {
+          letter.classList.add('fade-out');
+        }
+      });
+    }
 
-    mLetter.addEventListener('mouseleave', maybeHide);
-    musicOverlay.addEventListener('mouseleave', maybeHide);
+    function keepYoutubeActive() {
+      if (!oLetter || !youtubeOverlay || !yOverlay) return;
+      youtubeOverlay.classList.add('active');
+      yOverlay.classList.add('active');
+      oLetter.classList.add('active');
+    }
+
+    function maybeHideYoutube(e) {
+      if (!oLetter || !youtubeOverlay || !yOverlay) return;
+      const to = e.relatedTarget;
+      if (to && (youtubeOverlay.contains(to) || yOverlay.contains(to) || oLetter.contains(to))) return;
+      
+      youtubeOverlay.classList.remove('active');
+      yOverlay.classList.remove('active');
+      oLetter.classList.remove('active');
+      allLetters.forEach(letter => letter.classList.remove('fade-out'));
+      
+      setTimeout(() => {
+        if (!youtubeOverlay.classList.contains('active')) {
+          const letters = youtubeOverlay.querySelectorAll('.youtube-letter');
+          letters.forEach(letter => {
+            letter.style.animation = 'none';
+            void letter.offsetHeight;
+            letter.style.animation = '';
+          });
+        }
+        if (!yOverlay.classList.contains('active')) {
+          const letters = yOverlay.querySelectorAll('.y-letter');
+          letters.forEach(letter => {
+            letter.style.animation = 'none';
+            void letter.offsetHeight;
+            letter.style.animation = '';
+          });
+        }
+      }, 600);
+    }
+
+    function showBlogOverlay() {
+      if (!lLetter || !blogOverlay || !bOverlay) return;
+      
+      // Always recalculate position on hover to ensure accuracy
+      cachedBlogPosition = null;
+      cachedBPosition = null;
+      blogOverlay.classList.remove('active');
+      bOverlay.classList.remove('active');
+      positionBlogOverlay();
+      positionBOverlay();
+      void blogOverlay.offsetHeight;
+      void bOverlay.offsetHeight;
+      
+      blogOverlay.classList.add('active');
+      bOverlay.classList.add('active');
+      lLetter.classList.add('active');
+      allLetters.forEach(letter => {
+        if (!letter.classList.contains('hero-l-letter')) {
+          letter.classList.add('fade-out');
+        }
+      });
+    }
+
+    function keepBlogActive() {
+      if (!lLetter || !blogOverlay || !bOverlay) return;
+      blogOverlay.classList.add('active');
+      bOverlay.classList.add('active');
+      lLetter.classList.add('active');
+    }
+
+    function maybeHideBlog(e) {
+      if (!lLetter || !blogOverlay || !bOverlay) return;
+      const to = e.relatedTarget;
+      if (to && (blogOverlay.contains(to) || bOverlay.contains(to) || lLetter.contains(to))) return;
+      
+      blogOverlay.classList.remove('active');
+      bOverlay.classList.remove('active');
+      lLetter.classList.remove('active');
+      allLetters.forEach(letter => letter.classList.remove('fade-out'));
+      
+      setTimeout(() => {
+        if (!blogOverlay.classList.contains('active')) {
+          const letters = blogOverlay.querySelectorAll('.blog-letter');
+          letters.forEach(letter => {
+            letter.style.animation = 'none';
+            void letter.offsetHeight;
+            letter.style.animation = '';
+          });
+        }
+        if (!bOverlay.classList.contains('active')) {
+          const letters = bOverlay.querySelectorAll('.b-letter');
+          letters.forEach(letter => {
+            letter.style.animation = 'none';
+            void letter.offsetHeight;
+            letter.style.animation = '';
+          });
+        }
+      }, 600);
+    }
+
+    function showGithubOverlay() {
+      if (!iLetter || !githubOverlay || !gOverlay) return;
+      
+      // Always recalculate position on hover to ensure accuracy
+      cachedGithubPosition = null;
+      cachedGPosition = null;
+      githubOverlay.classList.remove('active');
+      gOverlay.classList.remove('active');
+      positionGithubOverlay();
+      positionGOverlay();
+      void githubOverlay.offsetHeight;
+      void gOverlay.offsetHeight;
+      
+      githubOverlay.classList.add('active');
+      gOverlay.classList.add('active');
+      iLetter.classList.add('active');
+      allLetters.forEach(letter => {
+        if (!letter.classList.contains('hero-i-letter')) {
+          letter.classList.add('fade-out');
+        }
+      });
+    }
+
+    function keepGithubActive() {
+      if (!iLetter || !githubOverlay || !gOverlay) return;
+      githubOverlay.classList.add('active');
+      gOverlay.classList.add('active');
+      iLetter.classList.add('active');
+    }
+
+    function maybeHideGithub(e) {
+      if (!iLetter || !githubOverlay || !gOverlay) return;
+      const to = e.relatedTarget;
+      if (to && (githubOverlay.contains(to) || gOverlay.contains(to) || iLetter.contains(to))) return;
+      
+      githubOverlay.classList.remove('active');
+      gOverlay.classList.remove('active');
+      iLetter.classList.remove('active');
+      allLetters.forEach(letter => letter.classList.remove('fade-out'));
+      
+      setTimeout(() => {
+        if (!githubOverlay.classList.contains('active')) {
+          const letters = githubOverlay.querySelectorAll('.github-letter');
+          letters.forEach(letter => {
+            letter.style.animation = 'none';
+            void letter.offsetHeight;
+            letter.style.animation = '';
+          });
+        }
+        if (!gOverlay.classList.contains('active')) {
+          const letters = gOverlay.querySelectorAll('.g-letter');
+          letters.forEach(letter => {
+            letter.style.animation = 'none';
+            void letter.offsetHeight;
+            letter.style.animation = '';
+          });
+        }
+      }, 600);
+    }
+
+    function showArtOverlay() {
+      if (!aLetter || !artOverlay) return;
+      
+      // Always recalculate position on hover to ensure accuracy
+      cachedArtPosition = null;
+      artOverlay.classList.remove('active');
+      positionArtOverlay();
+      void artOverlay.offsetHeight;
+      
+      artOverlay.classList.add('active');
+      aLetter.classList.add('active');
+      allLetters.forEach(letter => {
+        if (!letter.classList.contains('hero-a-letter')) {
+          letter.classList.add('fade-out');
+        }
+      });
+    }
+
+    function keepArtActive() {
+      if (!aLetter || !artOverlay) return;
+      artOverlay.classList.add('active');
+      aLetter.classList.add('active');
+    }
+
+    function maybeHideArt(e) {
+      if (!aLetter || !artOverlay) return;
+      const to = e.relatedTarget;
+      if (to && (artOverlay.contains(to) || aLetter.contains(to))) return;
+      
+      artOverlay.classList.remove('active');
+      aLetter.classList.remove('active');
+      allLetters.forEach(letter => letter.classList.remove('fade-out'));
+      
+      setTimeout(() => {
+        if (!artOverlay.classList.contains('active')) {
+          const letters = artOverlay.querySelectorAll('.art-letter');
+          letters.forEach(letter => {
+            letter.style.animation = 'none';
+            void letter.offsetHeight;
+            letter.style.animation = '';
+          });
+        }
+      }, 600);
+    }
+
+    function showGardeningOverlay() {
+      if (!gLetter || !gardeningOverlay) return;
+      
+      // Always recalculate position on hover to ensure accuracy
+      cachedGardeningPosition = null;
+      gardeningOverlay.classList.remove('active');
+      positionGardeningOverlay();
+      void gardeningOverlay.offsetHeight;
+      
+      gardeningOverlay.classList.add('active');
+      gLetter.classList.add('active');
+      allLetters.forEach(letter => {
+        if (!letter.classList.contains('hero-g-letter')) {
+          letter.classList.add('fade-out');
+        }
+      });
+    }
+
+    function keepGardeningActive() {
+      if (!gLetter || !gardeningOverlay) return;
+      gardeningOverlay.classList.add('active');
+      gLetter.classList.add('active');
+    }
+
+    function maybeHideGardening(e) {
+      if (!gLetter || !gardeningOverlay) return;
+      const to = e.relatedTarget;
+      if (to && (gardeningOverlay.contains(to) || gLetter.contains(to))) return;
+      
+      gardeningOverlay.classList.remove('active');
+      gLetter.classList.remove('active');
+      allLetters.forEach(letter => letter.classList.remove('fade-out'));
+      
+      setTimeout(() => {
+        if (!gardeningOverlay.classList.contains('active')) {
+          const letters = gardeningOverlay.querySelectorAll('.gardening-letter');
+          letters.forEach(letter => {
+            letter.style.animation = 'none';
+            void letter.offsetHeight;
+            letter.style.animation = '';
+          });
+        }
+      }, 600);
+    }
+
+    function showInstagramOverlay() {
+      if (!instagramILetter || !instagramOverlay) return;
+      
+      // Always recalculate position on hover to ensure accuracy
+      cachedInstagramPosition = null;
+      instagramOverlay.classList.remove('active');
+      positionInstagramOverlay();
+      void instagramOverlay.offsetHeight;
+      
+      instagramOverlay.classList.add('active');
+      instagramILetter.classList.add('active');
+      allLetters.forEach(letter => {
+        if (!letter.classList.contains('hero-instagram-i-letter')) {
+          letter.classList.add('fade-out');
+        }
+      });
+    }
+
+    function keepInstagramActive() {
+      if (!instagramILetter || !instagramOverlay) return;
+      instagramOverlay.classList.add('active');
+      instagramILetter.classList.add('active');
+    }
+
+    function maybeHideInstagram(e) {
+      if (!instagramILetter || !instagramOverlay) return;
+      const to = e.relatedTarget;
+      if (to && (instagramOverlay.contains(to) || instagramILetter.contains(to))) return;
+      
+      instagramOverlay.classList.remove('active');
+      instagramILetter.classList.remove('active');
+      allLetters.forEach(letter => letter.classList.remove('fade-out'));
+      
+      setTimeout(() => {
+        if (!instagramOverlay.classList.contains('active')) {
+          const letters = instagramOverlay.querySelectorAll('.instagram-letter');
+          letters.forEach(letter => {
+            letter.style.animation = 'none';
+            void letter.offsetHeight;
+            letter.style.animation = '';
+          });
+        }
+      }, 600);
+    }
+
+    function showResumeOverlay() {
+      if (!eLetter || !resumeOverlay || !rOverlay) return;
+      
+      // Always recalculate position on hover to ensure accuracy
+      cachedResumePosition = null;
+      cachedRPosition = null;
+      resumeOverlay.classList.remove('active');
+      rOverlay.classList.remove('active');
+      positionResumeOverlay();
+      positionROverlay();
+      void resumeOverlay.offsetHeight;
+      void rOverlay.offsetHeight;
+      
+      resumeOverlay.classList.add('active');
+      rOverlay.classList.add('active');
+      eLetter.classList.add('active');
+      allLetters.forEach(letter => {
+        if (!letter.classList.contains('hero-e-letter')) {
+          letter.classList.add('fade-out');
+        }
+      });
+    }
+
+    function keepResumeActive() {
+      if (!eLetter || !resumeOverlay || !rOverlay) return;
+      resumeOverlay.classList.add('active');
+      rOverlay.classList.add('active');
+      eLetter.classList.add('active');
+    }
+
+    function maybeHideResume(e) {
+      if (!eLetter || !resumeOverlay || !rOverlay) return;
+      const to = e.relatedTarget;
+      if (to && (resumeOverlay.contains(to) || rOverlay.contains(to) || eLetter.contains(to))) return;
+      
+      resumeOverlay.classList.remove('active');
+      rOverlay.classList.remove('active');
+      eLetter.classList.remove('active');
+      allLetters.forEach(letter => letter.classList.remove('fade-out'));
+      
+      setTimeout(() => {
+        if (!resumeOverlay.classList.contains('active')) {
+          const letters = resumeOverlay.querySelectorAll('.resume-letter');
+          letters.forEach(letter => {
+            letter.style.animation = 'none';
+            void letter.offsetHeight;
+            letter.style.animation = '';
+          });
+        }
+        if (!rOverlay.classList.contains('active')) {
+          const letters = rOverlay.querySelectorAll('.r-letter');
+          letters.forEach(letter => {
+            letter.style.animation = 'none';
+            void letter.offsetHeight;
+            letter.style.animation = '';
+          });
+        }
+      }, 600);
+    }
+
+    // Detect if device is touch-capable
+    const isTouchDevice = () => {
+      return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    };
+
+    // Mobile touch handlers
+    let musicTouchTimeout;
+    let youtubeTouchTimeout;
+    let blogTouchTimeout;
+    let githubTouchTimeout;
+    let artTouchTimeout;
+    let gardeningTouchTimeout;
+    let instagramTouchTimeout;
+    let resumeTouchTimeout;
+
+    function handleMusicClick(e) {
+      const isActive = musicOverlay.classList.contains('active');
+      
+      if (!isActive) {
+        // First tap: show overlay, prevent navigation
+        e.preventDefault();
+        showMusicOverlay();
+        // Auto-hide after 3 seconds on mobile
+        clearTimeout(musicTouchTimeout);
+        musicTouchTimeout = setTimeout(() => {
+          if (musicOverlay.classList.contains('active')) {
+            maybeHideMusic({ relatedTarget: null });
+          }
+        }, 3000);
+      }
+      // Second tap: isActive is true, allow default link behavior (navigation)
+    }
+
+    function handleYoutubeClick(e) {
+      const isActive = youtubeOverlay.classList.contains('active');
+      
+      if (!isActive) {
+        // First tap: show overlay, prevent navigation
+        e.preventDefault();
+        showYoutubeOverlay();
+        // Auto-hide after 3 seconds on mobile
+        clearTimeout(youtubeTouchTimeout);
+        youtubeTouchTimeout = setTimeout(() => {
+          if (youtubeOverlay.classList.contains('active')) {
+            maybeHideYoutube({ relatedTarget: null });
+          }
+        }, 3000);
+      }
+      // Second tap: isActive is true, allow default link behavior (navigation)
+    }
+
+    function handleBlogClick(e) {
+      const isActive = blogOverlay.classList.contains('active');
+      
+      if (!isActive) {
+        // First tap: show overlay, prevent navigation
+        e.preventDefault();
+        showBlogOverlay();
+        // Auto-hide after 3 seconds on mobile
+        clearTimeout(blogTouchTimeout);
+        blogTouchTimeout = setTimeout(() => {
+          if (blogOverlay.classList.contains('active')) {
+            maybeHideBlog({ relatedTarget: null });
+          }
+        }, 3000);
+      }
+      // Second tap: isActive is true, allow default link behavior (navigation)
+    }
+
+    function handleGithubClick(e) {
+      const isActive = githubOverlay.classList.contains('active');
+      
+      if (!isActive) {
+        // First tap: show overlay, prevent navigation
+        e.preventDefault();
+        showGithubOverlay();
+        // Auto-hide after 3 seconds on mobile
+        clearTimeout(githubTouchTimeout);
+        githubTouchTimeout = setTimeout(() => {
+          if (githubOverlay.classList.contains('active')) {
+            maybeHideGithub({ relatedTarget: null });
+          }
+        }, 3000);
+      }
+      // Second tap: isActive is true, allow default link behavior (navigation)
+    }
+
+    function handleArtClick(e) {
+      const isActive = artOverlay.classList.contains('active');
+      
+      if (!isActive) {
+        // First tap: show overlay, prevent navigation
+        e.preventDefault();
+        showArtOverlay();
+        // Auto-hide after 3 seconds on mobile
+        clearTimeout(artTouchTimeout);
+        artTouchTimeout = setTimeout(() => {
+          if (artOverlay.classList.contains('active')) {
+            maybeHideArt({ relatedTarget: null });
+          }
+        }, 3000);
+      }
+      // Second tap: isActive is true, allow default link behavior (navigation)
+    }
+
+    function handleGardeningClick(e) {
+      const isActive = gardeningOverlay.classList.contains('active');
+      
+      if (!isActive) {
+        // First tap: show overlay, prevent navigation
+        e.preventDefault();
+        showGardeningOverlay();
+        // Auto-hide after 3 seconds on mobile
+        clearTimeout(gardeningTouchTimeout);
+        gardeningTouchTimeout = setTimeout(() => {
+          if (gardeningOverlay.classList.contains('active')) {
+            maybeHideGardening({ relatedTarget: null });
+          }
+        }, 3000);
+      }
+      // Second tap: isActive is true, allow default link behavior (navigation)
+    }
+
+    function handleInstagramClick(e) {
+      const isActive = instagramOverlay.classList.contains('active');
+      
+      if (!isActive) {
+        // First tap: show overlay, prevent navigation
+        e.preventDefault();
+        showInstagramOverlay();
+        // Auto-hide after 3 seconds on mobile
+        clearTimeout(instagramTouchTimeout);
+        instagramTouchTimeout = setTimeout(() => {
+          if (instagramOverlay.classList.contains('active')) {
+            maybeHideInstagram({ relatedTarget: null });
+          }
+        }, 3000);
+      }
+      // Second tap: isActive is true, allow default link behavior (navigation)
+    }
+
+    function handleResumeClick(e) {
+      const isActive = resumeOverlay.classList.contains('active');
+      
+      if (!isActive) {
+        // First tap: show overlay, prevent navigation
+        e.preventDefault();
+        showResumeOverlay();
+        // Auto-hide after 3 seconds on mobile
+        clearTimeout(resumeTouchTimeout);
+        resumeTouchTimeout = setTimeout(() => {
+          if (resumeOverlay.classList.contains('active')) {
+            maybeHideResume({ relatedTarget: null });
+          }
+        }, 3000);
+      }
+      // Second tap: isActive is true, allow default link behavior (navigation)
+    }
+
+    // Setup Music overlay events
+    if (mLetter && musicOverlay) {
+      if (isTouchDevice()) {
+        // Touch device: use click/tap
+        mLetter.addEventListener('click', handleMusicClick);
+        // Allow clicking overlay to navigate on second tap
+        musicOverlay.parentElement.addEventListener('click', handleMusicClick);
+      } else {
+        // Desktop: use hover
+        mLetter.addEventListener('mouseenter', showMusicOverlay);
+        musicOverlay.addEventListener('mouseenter', keepMusicActive);
+        mLetter.addEventListener('mouseleave', maybeHideMusic);
+        musicOverlay.addEventListener('mouseleave', maybeHideMusic);
+      }
+    }
+
+    // Setup Youtube overlay events
+    if (oLetter && youtubeOverlay && yOverlay) {
+      if (isTouchDevice()) {
+        // Touch device: use click/tap
+        oLetter.addEventListener('click', handleYoutubeClick);
+        // Allow clicking overlays to navigate on second tap
+        youtubeOverlay.parentElement.addEventListener('click', handleYoutubeClick);
+        yOverlay.parentElement.addEventListener('click', handleYoutubeClick);
+      } else {
+        // Desktop: use hover
+        oLetter.addEventListener('mouseenter', showYoutubeOverlay);
+        youtubeOverlay.addEventListener('mouseenter', keepYoutubeActive);
+        yOverlay.addEventListener('mouseenter', keepYoutubeActive);
+        oLetter.addEventListener('mouseleave', maybeHideYoutube);
+        youtubeOverlay.addEventListener('mouseleave', maybeHideYoutube);
+        yOverlay.addEventListener('mouseleave', maybeHideYoutube);
+      }
+    }
+
+    // Setup Blog overlay events
+    if (lLetter && blogOverlay && bOverlay) {
+      if (isTouchDevice()) {
+        // Touch device: use click/tap
+        lLetter.addEventListener('click', handleBlogClick);
+        // Allow clicking overlays to navigate on second tap
+        blogOverlay.parentElement.addEventListener('click', handleBlogClick);
+        bOverlay.parentElement.addEventListener('click', handleBlogClick);
+      } else {
+        // Desktop: use hover
+        lLetter.addEventListener('mouseenter', showBlogOverlay);
+        blogOverlay.addEventListener('mouseenter', keepBlogActive);
+        bOverlay.addEventListener('mouseenter', keepBlogActive);
+        lLetter.addEventListener('mouseleave', maybeHideBlog);
+        blogOverlay.addEventListener('mouseleave', maybeHideBlog);
+        bOverlay.addEventListener('mouseleave', maybeHideBlog);
+      }
+    }
+
+    // Setup Github overlay events
+    if (iLetter && githubOverlay && gOverlay) {
+      if (isTouchDevice()) {
+        // Touch device: use click/tap
+        iLetter.addEventListener('click', handleGithubClick);
+        // Allow clicking overlays to navigate on second tap
+        githubOverlay.parentElement.addEventListener('click', handleGithubClick);
+        gOverlay.parentElement.addEventListener('click', handleGithubClick);
+      } else {
+        // Desktop: use hover
+        iLetter.addEventListener('mouseenter', showGithubOverlay);
+        githubOverlay.addEventListener('mouseenter', keepGithubActive);
+        gOverlay.addEventListener('mouseenter', keepGithubActive);
+        iLetter.addEventListener('mouseleave', maybeHideGithub);
+        githubOverlay.addEventListener('mouseleave', maybeHideGithub);
+        gOverlay.addEventListener('mouseleave', maybeHideGithub);
+      }
+    }
+
+    // Setup Art overlay events
+    if (aLetter && artOverlay) {
+      if (isTouchDevice()) {
+        // Touch device: use click/tap
+        aLetter.addEventListener('click', handleArtClick);
+        // Allow clicking overlay to navigate on second tap
+        artOverlay.parentElement.addEventListener('click', handleArtClick);
+      } else {
+        // Desktop: use hover
+        aLetter.addEventListener('mouseenter', showArtOverlay);
+        artOverlay.addEventListener('mouseenter', keepArtActive);
+        aLetter.addEventListener('mouseleave', maybeHideArt);
+        artOverlay.addEventListener('mouseleave', maybeHideArt);
+      }
+    }
+
+    // Setup Gardening overlay events
+    if (gLetter && gardeningOverlay) {
+      if (isTouchDevice()) {
+        // Touch device: use click/tap
+        gLetter.addEventListener('click', handleGardeningClick);
+        // Allow clicking overlay to navigate on second tap
+        gardeningOverlay.parentElement.addEventListener('click', handleGardeningClick);
+      } else {
+        // Desktop: use hover
+        gLetter.addEventListener('mouseenter', showGardeningOverlay);
+        gardeningOverlay.addEventListener('mouseenter', keepGardeningActive);
+        gLetter.addEventListener('mouseleave', maybeHideGardening);
+        gardeningOverlay.addEventListener('mouseleave', maybeHideGardening);
+      }
+    }
+
+    // Setup Instagram overlay events
+    if (instagramILetter && instagramOverlay) {
+      if (isTouchDevice()) {
+        // Touch device: use click/tap
+        instagramILetter.addEventListener('click', handleInstagramClick);
+        // Allow clicking overlay to navigate on second tap
+        instagramOverlay.parentElement.addEventListener('click', handleInstagramClick);
+      } else {
+        // Desktop: use hover
+        instagramILetter.addEventListener('mouseenter', showInstagramOverlay);
+        instagramOverlay.addEventListener('mouseenter', keepInstagramActive);
+        instagramILetter.addEventListener('mouseleave', maybeHideInstagram);
+        instagramOverlay.addEventListener('mouseleave', maybeHideInstagram);
+      }
+    }
+
+    // Setup Resume overlay events
+    if (eLetter && resumeOverlay && rOverlay) {
+      if (isTouchDevice()) {
+        // Touch device: use click/tap
+        eLetter.addEventListener('click', handleResumeClick);
+        // Allow clicking overlays to navigate on second tap
+        resumeOverlay.parentElement.addEventListener('click', handleResumeClick);
+        rOverlay.parentElement.addEventListener('click', handleResumeClick);
+      } else {
+        // Desktop: use hover
+        eLetter.addEventListener('mouseenter', showResumeOverlay);
+        resumeOverlay.addEventListener('mouseenter', keepResumeActive);
+        rOverlay.addEventListener('mouseenter', keepResumeActive);
+        eLetter.addEventListener('mouseleave', maybeHideResume);
+        resumeOverlay.addEventListener('mouseleave', maybeHideResume);
+        rOverlay.addEventListener('mouseleave', maybeHideResume);
+      }
+    }
+
+    // Close overlays on tap outside for touch devices
+    if (isTouchDevice()) {
+      document.addEventListener('click', (e) => {
+        const isMusicArea = mLetter?.contains(e.target) || musicOverlay?.parentElement?.contains(e.target);
+        const isYoutubeArea = oLetter?.contains(e.target) || youtubeOverlay?.parentElement?.contains(e.target) || yOverlay?.parentElement?.contains(e.target);
+        const isBlogArea = lLetter?.contains(e.target) || blogOverlay?.parentElement?.contains(e.target) || bOverlay?.parentElement?.contains(e.target);
+        const isGithubArea = iLetter?.contains(e.target) || githubOverlay?.parentElement?.contains(e.target) || gOverlay?.parentElement?.contains(e.target);
+        const isArtArea = aLetter?.contains(e.target) || artOverlay?.parentElement?.contains(e.target);
+        const isGardeningArea = gLetter?.contains(e.target) || gardeningOverlay?.parentElement?.contains(e.target);
+        const isInstagramArea = instagramILetter?.contains(e.target) || instagramOverlay?.parentElement?.contains(e.target);
+        const isResumeArea = eLetter?.contains(e.target) || resumeOverlay?.parentElement?.contains(e.target) || rOverlay?.parentElement?.contains(e.target);
+        
+        if (!isMusicArea && musicOverlay?.classList.contains('active')) {
+          maybeHideMusic({ relatedTarget: null });
+        }
+        
+        if (!isYoutubeArea && (youtubeOverlay?.classList.contains('active') || yOverlay?.classList.contains('active'))) {
+          maybeHideYoutube({ relatedTarget: null });
+        }
+        
+        if (!isBlogArea && (blogOverlay?.classList.contains('active') || bOverlay?.classList.contains('active'))) {
+          maybeHideBlog({ relatedTarget: null });
+        }
+        
+        if (!isGithubArea && (githubOverlay?.classList.contains('active') || gOverlay?.classList.contains('active'))) {
+          maybeHideGithub({ relatedTarget: null });
+        }
+        
+        if (!isArtArea && artOverlay?.classList.contains('active')) {
+          maybeHideArt({ relatedTarget: null });
+        }
+        
+        if (!isGardeningArea && gardeningOverlay?.classList.contains('active')) {
+          maybeHideGardening({ relatedTarget: null });
+        }
+        
+        if (!isInstagramArea && instagramOverlay?.classList.contains('active')) {
+          maybeHideInstagram({ relatedTarget: null });
+        }
+        
+        if (!isResumeArea && (resumeOverlay?.classList.contains('active') || rOverlay?.classList.contains('active'))) {
+          maybeHideResume({ relatedTarget: null });
+        }
+      });
+    }
 
     window.addEventListener('resize', () => {
-      if (musicOverlay.classList.contains('active')) positionOverlay();
+      cachedMusicPosition = null;
+      cachedYoutubePosition = null;
+      cachedYPosition = null;
+      cachedBlogPosition = null;
+      cachedBPosition = null;
+      cachedGithubPosition = null;
+      cachedGPosition = null;
+      cachedArtPosition = null;
+      cachedGardeningPosition = null;
+      cachedInstagramPosition = null;
+      cachedResumePosition = null;
+      cachedRPosition = null;
+      if (musicOverlay && musicOverlay.classList.contains('active')) positionMusicOverlay();
+      if (youtubeOverlay && youtubeOverlay.classList.contains('active')) positionYoutubeOverlay();
+      if (yOverlay && yOverlay.classList.contains('active')) positionYOverlay();
+      if (blogOverlay && blogOverlay.classList.contains('active')) positionBlogOverlay();
+      if (bOverlay && bOverlay.classList.contains('active')) positionBOverlay();
+      if (githubOverlay && githubOverlay.classList.contains('active')) positionGithubOverlay();
+      if (gOverlay && gOverlay.classList.contains('active')) positionGOverlay();
+      if (artOverlay && artOverlay.classList.contains('active')) positionArtOverlay();
+      if (gardeningOverlay && gardeningOverlay.classList.contains('active')) positionGardeningOverlay();
+      if (instagramOverlay && instagramOverlay.classList.contains('active')) positionInstagramOverlay();
+      if (resumeOverlay && resumeOverlay.classList.contains('active')) positionResumeOverlay();
+      if (rOverlay && rOverlay.classList.contains('active')) positionROverlay();
     });
   });
 </script>
